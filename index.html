@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños, PERRIN!</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display para un toque elegante/retro, e Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Librería de Confeti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        charcoal: '#1a1a1a',
+                        gold: '#c59b27',
+                        burgundy: '#6b1524',
+                        vintage: '#f5deb3'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #f5deb3;
+            overflow-x: hidden;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Patrón de panal sutil */
+        .bg-honeycomb {
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='69' viewBox='0 0 40 69' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 34.54l10-5.77v-11.54l-10-5.77V0h20v11.54l10 5.77v11.54l-10 5.77v11.54l10 5.77v11.54l-10 5.77v11.54h-20v-11.54l-10-5.77v-11.54l10-5.77V34.54zm20 11.54l10-5.77v-11.54l-10-5.77-10 5.77v11.54l10 5.77z' fill='%23c59b27' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-attachment: fixed;
+        }
+
+        /* Efecto de resplandor para el título principal */
+        .text-glow {
+            text-shadow: 0 0 15px rgba(197, 155, 39, 0.6), 0 0 30px rgba(197, 155, 39, 0.4);
+        }
+
+        /* Filtro vintage para imágenes estilo Polaroid */
+        .img-vintage {
+            filter: sepia(0.5) contrast(1.1) brightness(0.9) hue-rotate(-10deg);
+            transition: filter 0.5s ease;
+        }
+        
+        .img-vintage:hover {
+            filter: sepia(0.1) contrast(1.1) brightness(1);
+        }
+
+        /* Animaciones */
+        .scale-in-center {
+            animation: scale-in-center 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+        @keyframes scale-in-center {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .pulse-gift {
+            animation: pulse-animation 2s infinite;
+        }
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0px rgba(197, 155, 39, 0.7); }
+            100% { box-shadow: 0 0 0 25px rgba(197, 155, 39, 0); }
+        }
+
+        .float-bee {
+            animation: float-bee-anim 3s ease-in-out infinite;
+        }
+        @keyframes float-bee-anim {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        /* Degradado oscuro para la tarjeta */
+        .card-bg {
+            background: linear-gradient(145deg, #1f1f1f, #151515);
+            box-shadow:  15px 15px 30px #0a0a0a, -15px -15px 30px #2a2a2a;
+        }
+    </style>
+</head>
+<body class="bg-honeycomb font-sans antialiased selection:bg-gold selection:text-charcoal relative">
+
+    <!-- Overlay radial para oscurecer los bordes -->
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)] z-0 pointer-events-none"></div>
+
+    <!-- PANTALLA INICIAL: Caja de Regalo y Abeja -->
+    <div id="start-screen" class="flex flex-col items-center justify-center z-50 absolute inset-0 transition-opacity duration-700">
+        
+        <!-- Abeja animada en SVG -->
+        <div class="float-bee mb-6 drop-shadow-[0_0_15px_rgba(197,155,39,0.8)] z-10">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Alas transparentes -->
+                <path d="M12 10C10 5 4 3 2 7C0 11 6 13 12 12C18 13 24 11 22 7C20 3 14 5 12 10Z" fill="rgba(255, 255, 255, 0.6)"/>
+                <!-- Cuerpo dorado -->
+                <path d="M12 21C8.5 21 6 17.5 6 13C6 8.5 8.5 6 12 6C15.5 6 18 8.5 18 13C18 17.5 15.5 21 12 21Z" fill="#c59b27"/>
+                <!-- Rayas oscuras -->
+                <path d="M6.5 10H17.5M6 14H18M7.5 17.5H16.5" stroke="#1a1a1a" stroke-width="2.5"/>
+                <!-- Ojos -->
+                <circle cx="10" cy="8.5" r="1.5" fill="#1a1a1a"/>
+                <circle cx="14" cy="8.5" r="1.5" fill="#1a1a1a"/>
+            </svg>
+        </div>
+
+        <h1 class="font-serif text-4xl md:text-5xl text-gold font-bold mb-8 text-center text-glow">
+            Una visita musical...
+        </h1>
+
+        <!-- Botón de Regalo -->
+        <button id="open-btn" class="pulse-gift bg-burgundy border-4 border-gold text-vintage rounded-xl w-32 h-32 flex items-center justify-center text-6xl shadow-2xl hover:scale-110 transition-transform duration-300 relative z-20">
+            🎁
+        </button>
+        <p class="text-gold/70 text-lg mt-6 font-serif italic tracking-wider">Abre tu regalo</p>
+    </div>
+
+    <!-- TARJETA DE CUMPLEAÑOS (Oculta al inicio) -->
+    <div id="birthday-card" class="hidden scale-in-center card-bg p-0 rounded-2xl max-w-4xl w-[95%] text-center z-20 relative border border-gold/20 max-h-[90vh] overflow-y-auto custom-scrollbar shadow-2xl">
+        
+        <!-- Cabecera inmersiva con imagen de fondo -->
+        <div class="relative w-full h-48 md:h-64 rounded-t-2xl overflow-hidden mb-8 border-b border-gold/30">
+            <img src="maxresdefault.jpg" alt="Imperfecto Extraño" class="w-full h-full object-cover filter brightness-75 sepia-[0.3]">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/50 to-transparent"></div>
+        </div>
+
+        <div class="px-8 pb-12">
+            <h1 class="font-serif text-5xl md:text-6xl font-bold mb-4 text-vintage tracking-tight text-glow">
+                ¡Feliz Cumpleaños, <br><span class="text-gold">PERRIN</span>!
+            </h1>
+            
+            <p class="text-vintage/80 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl mx-auto font-light">
+                Que en este nuevo ciclo de vida no haya <span class="text-gold italic">"Dulce Soledad"</span>, sino momentos épicos que reflejen tu mejor <span class="text-gold italic">"Vida en el Espejo"</span>. Celebra a lo grande, como una verdadera <span class="text-gold italic">"Visita"</span> que acelera nuestra <span class="text-gold italic">"Manía Cardíaca"</span> y se queda para alegrarnos el alma. 
+            </p>
+
+            <!-- SECCIÓN DE FOTOS ESTILO POLAROID: Momentos Inolvidables -->
+            <div class="mt-12 mb-12 border-t border-b border-gold/10 py-10">
+                <h2 class="font-serif text-3xl md:text-4xl text-gold mb-8 italic">Momentos Inolvidables</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 p-4">
+                    
+                    <!-- FOTO 1: Collage de Discos de Enjambre -->
+                    <div class="bg-[#f0e6d2] p-3 pb-10 shadow-2xl transform -rotate-2 hover:rotate-0 hover:scale-105 transition-all duration-500 rounded-sm border border-black/20">
+                        <img src="WhatsApp Image 2026-10-29 at 08.26.30 (2).jpeg" alt="Discos de Enjambre" class="w-full aspect-square object-cover img-vintage border border-black/10 bg-black">
+                        <p class="font-serif text-charcoal font-bold mt-4 text-lg absolute bottom-2 w-full left-0 opacity-90"></p>
+                    </div>
+
+                    <!-- FOTO 2: Noches de Salón -->
+                    <div class="bg-[#f0e6d2] p-3 pb-10 shadow-2xl transform rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-500 rounded-sm border border-black/20">
+                        <img src="WhatsApp Image 2026-10-29 at 08.27.49 (1).jpeg" alt="Noches de Salón" class="w-full aspect-square object-cover img-vintage border border-black/10 bg-black">
+                        <p class="font-serif text-charcoal font-bold mt-4 text-lg absolute bottom-2 w-full left-0 opacity-90"></p>
+                    </div>
+
+                    <!-- FOTO 3: Aventuras -->
+                    <div class="bg-[#f0e6d2] p-3 pb-10 shadow-2xl transform -rotate-1 hover:rotate-0 hover:scale-105 transition-all duration-500 rounded-sm border border-black/20">
+                        <img src="WhatsApp Image 2026-10-29 at 08.27.49.jpeg" alt="Aventuras" class="w-full aspect-square object-cover img-vintage border border-black/10 bg-black">
+                        <p class="font-serif text-charcoal font-bold mt-4 text-lg absolute bottom-2 w-full left-0 opacity-90"></p>
+                    </div>
+
+                    <!-- FOTO 4: Amigos -->
+                    <div class="bg-[#f0e6d2] p-3 pb-10 shadow-2xl transform rotate-2 hover:rotate-0 hover:scale-105 transition-all duration-500 rounded-sm border border-black/20">
+                        <img src="WhatsApp Image 2026-10-29 at 08.48.22.jpeg" alt="Amigos" class="w-full aspect-square object-cover img-vintage border border-black/10 bg-black">
+                        <p class="font-serif text-charcoal font-bold mt-4 text-lg absolute bottom-2 w-full left-0 opacity-90"></p>
+                    </div>
+
+                    <!-- FOTO 5: Recuerdos -->
+                    <div class="bg-[#f0e6d2] p-3 pb-10 shadow-2xl transform -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-500 rounded-sm border border-black/20">
+                        <img src="WhatsApp Image 2026-10-29 at 08.48.23 (1).jpeg" alt="Recuerdos" class="w-full aspect-square object-cover img-vintage border border-black/10 bg-black">
+                        <p class="font-serif text-charcoal font-bold mt-4 text-lg absolute bottom-2 w-full left-0 opacity-90"></p>
+                    </div>
+
+                    <!-- INSTRUCCIONES PARA AGREGAR TU FOTO 6 -->
+                    <!-- 1. Borra "https://picsum.photos/400/400?random=6" -->
+                    <!-- 2. Escribe el nombre de tu archivo de foto -->
+                    <div class="bg-[#f0e6d2] p-3 pb-10 shadow-2xl transform rotate-1 hover:rotate-0 hover:scale-105 transition-all duration-500 rounded-sm border border-black/20">
+                        <img src="WhatsApp Image 2026-10-29 at 08.48.23.jpeg" alt="Agrega tu foto aquí" class="w-full aspect-square object-cover img-vintage border border-black/10 bg-black">
+                        <p class="font-serif text-charcoal font-bold mt-4 text-lg absolute bottom-2 w-full left-0 opacity-90"></p>
+                    </div>
+
+                </div>
+            </div>
+
+            <button id="more-confetti" class="mt-4 bg-burgundy hover:bg-gold text-vintage hover:text-charcoal font-serif font-bold py-3 px-8 rounded-full shadow-[0_0_15px_rgba(197,155,39,0.3)] border border-gold/50 transform hover:-translate-y-1 transition-all duration-300">
+                Lanzar Confeti Vintage
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Elementos del DOM
+        const startScreen = document.getElementById('start-screen');
+        const openBtn = document.getElementById('open-btn');
+        const birthdayCard = document.getElementById('birthday-card');
+        const moreConfettiBtn = document.getElementById('more-confetti');
+
+        // Paleta de colores temáticos de Enjambre (Dorado, Borgoña, Carbón, Vintage)
+        const enjambreColors = ['#c59b27', '#6b1524', '#f5deb3', '#1a1a1a'];
+
+        // Función para disparar confeti temático
+        function fireConfetti() {
+            var duration = 4 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 100 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                var particleCount = 50 * (timeLeft / duration);
+                // Desde los lados
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }, 
+                    colors: enjambreColors 
+                }));
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }, 
+                    colors: enjambreColors 
+                }));
+            }, 250);
+        }
+
+        // Función para un disparo rápido de confeti desde el centro
+        function popConfetti() {
+            confetti({
+                particleCount: 150,
+                spread: 120,
+                origin: { y: 0.6 },
+                colors: enjambreColors
+            });
+        }
+
+        // Evento principal: Abrir el regalo
+        openBtn.addEventListener('click', () => {
+            // 1. Ocultar pantalla inicial
+            startScreen.style.opacity = '0';
+            setTimeout(() => {
+                startScreen.classList.add('hidden');
+                
+                // 2. Mostrar tarjeta con animación
+                birthdayCard.classList.remove('hidden');
+                
+                // 3. Disparar celebración con colores de Enjambre
+                fireConfetti();
+                
+            }, 700); // Sincronizado con la transición de opacidad
+        });
+
+        // Evento secundario: Botón de más confeti
+        moreConfettiBtn.addEventListener('click', popConfetti);
+
+    </script>
+</body>
+</html>
